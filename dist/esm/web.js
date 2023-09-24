@@ -1,7 +1,7 @@
 import { CapacitorException, ExceptionCode, WebPlugin } from '@capacitor/core';
 export class BarcodeScannerWeb extends WebPlugin {
     async startScan(_options) {
-        throw this.createUnavailableException();
+        console.log("start!!!")
     }
     async stopScan() {
         throw this.createUnavailableException();
