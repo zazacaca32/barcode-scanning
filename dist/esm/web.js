@@ -1,10 +1,21 @@
+import QRScanner from 'cordova-plugin-qrscanner';
 import { CapacitorException, ExceptionCode, WebPlugin } from '@capacitor/core';
 export class BarcodeScannerWeb extends WebPlugin {
     async startScan(_options) {
-        console.log("start!!!")
+        console.log("start!")
+        QRScanner.scan((err, text) => {
+            if (err) {
+                console.log(err)
+            } else {
+                window.dispatchEvent(new CustomEvent("barcodeScanned", {
+                    detail: { text: text.result }
+                  }));
+            }
+        });
+
     }
     async stopScan() {
-        throw this.createUnavailableException();
+        QRScanner.hide()
     }
     async readBarcodesFromImage(_options) {
         throw this.createUnavailableException();
